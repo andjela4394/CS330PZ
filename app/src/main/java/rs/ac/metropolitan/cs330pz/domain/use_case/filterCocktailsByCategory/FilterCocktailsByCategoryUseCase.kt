@@ -15,7 +15,8 @@ class FilterCoctailsByCategory @Inject constructor(private val repository : Cock
     operator fun invoke(cocktailCategory: String): Flow<Resource<List<Cocktail>>> = flow {
         try {
             emit(Resource.Loading<List<Cocktail>>())
-            val cocktails = repository.filterCocktailsByCategory(cocktailCategory).map { it.toCocktail() }
+            val cocktailsDto = repository.filterCocktailsByCategory(cocktailCategory)
+            val cocktails = cocktailsDto.drinks.map { it.toCocktail() }
             emit(Resource.Success<List<Cocktail>>(cocktails))
         } catch(e: HttpException) {
             emit(Resource.Error<List<Cocktail>>(e.localizedMessage ?: "An unexpected error occured"))

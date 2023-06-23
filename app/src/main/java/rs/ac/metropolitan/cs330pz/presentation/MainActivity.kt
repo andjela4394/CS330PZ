@@ -13,10 +13,15 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.example.compose.AppTheme
+import dagger.hilt.android.AndroidEntryPoint
 import rs.ac.metropolitan.cs330pz.domain.model.Cocktail
+import rs.ac.metropolitan.cs330pz.presentation.cocktail_list.CocktailListScreen
 
-
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
 
@@ -24,7 +29,24 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent{
             AppTheme {
-
+                Surface(color = MaterialTheme.colorScheme.background) {
+                    val navController = rememberNavController()
+                    NavHost(
+                        navController = navController,
+                        startDestination = Screen.CocktailListScreen.route
+                    ) {
+                        composable(
+                            route = Screen.CocktailListScreen.route
+                        ) {
+                            CocktailListScreen(navController)
+                        }/*
+                        composable(
+                            route = Screen.CocktailDetailScreen.route + "/{coinId}"
+                        ) {
+                            CoinDetailScreen()
+                        }*/
+                    }
+                }
 
             }
         }

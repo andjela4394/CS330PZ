@@ -1,4 +1,4 @@
-package rs.ac.metropolitan.cs330pz.domain.use_case.getCoctailsById
+package rs.ac.metropolitan.cs330pz.domain.use_case.getCocktailsById
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -9,7 +9,7 @@ import rs.ac.metropolitan.cs330pz.domain.repository.CocktailRepository
 import java.io.IOException
 import javax.inject.Inject
 
-class GetCoctailByIdUseCase @Inject constructor(private val repository : CocktailRepository) {
+class GetCocktailByIdUseCase @Inject constructor(private val repository : CocktailRepository) {
 
     operator fun invoke(cocktailId: String): Flow<Resource<Cocktail>> = flow {
         try {
