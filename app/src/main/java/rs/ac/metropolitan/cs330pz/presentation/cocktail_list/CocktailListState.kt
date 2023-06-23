@@ -5,5 +5,9 @@ import rs.ac.metropolitan.cs330pz.domain.model.Cocktail
 data class CocktailListState (
     val isLoading: Boolean = false,
     val cocktails: List<Cocktail> = emptyList(),
-    val error: String = ""
+    val error: String = "",
+    val search_anime: List<Cocktail> = emptyList(),
+    val searchString:String = "",
+    val searchTags:String = ""
+
 )

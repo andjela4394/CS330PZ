@@ -19,6 +19,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.compose.AppTheme
 import dagger.hilt.android.AndroidEntryPoint
 import rs.ac.metropolitan.cs330pz.domain.model.Cocktail
+import rs.ac.metropolitan.cs330pz.presentation.cocktail_detail.CocktailDetailScreen
 import rs.ac.metropolitan.cs330pz.presentation.cocktail_list.CocktailListScreen
 
 @AndroidEntryPoint
@@ -39,12 +40,12 @@ class MainActivity : ComponentActivity() {
                             route = Screen.CocktailListScreen.route
                         ) {
                             CocktailListScreen(navController)
-                        }/*
+                        }
                         composable(
-                            route = Screen.CocktailDetailScreen.route + "/{coinId}"
+                            route = Screen.CocktailDetailScreen.route + "/{cocktailId}"
                         ) {
-                            CoinDetailScreen()
-                        }*/
+                            CocktailDetailScreen()
+                        }
                     }
                 }
 

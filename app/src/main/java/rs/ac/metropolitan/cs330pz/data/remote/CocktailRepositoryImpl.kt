@@ -1,26 +1,28 @@
 package rs.ac.metropolitan.cs330pz.data.remote
 
 import rs.ac.metropolitan.cs330pz.data.remote.dto.CocktailDto
-import rs.ac.metropolitan.cs330pz.data.remote.dto.CocktailsDto
-import rs.ac.metropolitan.cs330pz.domain.model.Cocktail
-import rs.ac.metropolitan.cs330pz.domain.model.Cocktails
 import rs.ac.metropolitan.cs330pz.domain.repository.CocktailRepository
 import javax.inject.Inject
 
 
-class CocktailRepositoryImpl @Inject constructor(private val cocktailApi: CocktailApi): CocktailRepository{
-    override suspend fun getCocktailsByName(name: String): CocktailsDto {
-        return cocktailApi.searchCocktailsByName(name)
+class CocktailRepositoryImpl @Inject constructor(
+    private val cocktailApi: CocktailApi
+): CocktailRepository{
 
+
+    override suspend fun getAll(): List<CocktailDto> {
+        return cocktailApi.getAll()
     }
 
-    override suspend fun getCocktailById(id: String): CocktailDto? {
-        return cocktailApi.getCocktailById(id)
+    override suspend fun getCocktailsByName(name: String): List<CocktailDto> {
+        return cocktailApi.getCocktailsByName()
     }
 
-    override suspend fun filterCocktailsByCategory(category: String): CocktailsDto {
-        return cocktailApi.filterCocktailsByCategory(category)
+    override suspend fun getCocktailById(cocktailId: Int): CocktailDto {
+        return cocktailApi.getCocktailById(cocktailId)
     }
+
+
 
 
 }

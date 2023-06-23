@@ -35,8 +35,8 @@ fun CocktailListItem(
             overflow = TextOverflow.Ellipsis
         )
         Text(
-            text = "${cocktail.category} ${cocktail.isAlcoholic}",
-            color = if(cocktail.isAlcoholic == "Alcoholic") Color.LightGray else Color.DarkGray,
+            text = "${cocktail.strength}",
+            color = Color.DarkGray,
             fontStyle = FontStyle.Italic,
             textAlign = TextAlign.End,
             style = MaterialTheme.typography.bodyMedium,
