@@ -1,4 +1,4 @@
-package rs.ac.metropolitan.cs330pz.ui.theme
+package rs.ac.metropolitan.cs330pz.presentation.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
