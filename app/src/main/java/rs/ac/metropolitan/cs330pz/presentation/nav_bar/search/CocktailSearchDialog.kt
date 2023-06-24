@@ -48,7 +48,7 @@ fun CocktailSearchDialog (
 
     var name by remember { mutableStateOf(TextFieldValue("")) }
     val tags = listOf(
-        "Alchocolic",
+        "Alcoholic",
         "Classic",
         "Strong",
         "Citrus",

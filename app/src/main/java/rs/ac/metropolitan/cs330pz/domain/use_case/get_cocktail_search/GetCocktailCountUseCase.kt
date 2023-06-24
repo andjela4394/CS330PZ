@@ -16,8 +16,8 @@ class GetCocktailCountUseCase @Inject constructor(
 
         try {
             emit(Resource.Loading())
-            val animes = repository.getCocktailCountByNameAndTags(tags=tags,name=name)
-            emit(Resource.Success(animes))
+            val cocktails = repository.getCocktailCountByNameAndTags(tags=tags,name=name)
+            emit(Resource.Success(cocktails))
         }
         catch (e: HttpException){
             emit(

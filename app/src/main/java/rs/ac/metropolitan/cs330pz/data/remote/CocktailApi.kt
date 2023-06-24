@@ -34,14 +34,14 @@ interface CocktailApi {
     @GET("/cocktails")
     suspend fun getCocktailsByNameAndTags(
         @Query("name_like") name: String = "",
-        @Query("tags_like") tag: String = "",
+        @Query("tags_like") tags: String = "",
         @Query("_page") page: Int = 1,
         @Query("name_regex_flags") flags: String = "i"
     ):List<CocktailDto>
 
     @GET("/cocktails")
     suspend fun getCocktailsByTag(
-        @Query("name_like") tag: String,
+        @Query("tag_like") tags: String,
         @Query("_page") page: Int = 1,
         @Query("name_regex_flags") flags: String = "i"
     ):List<CocktailDto>
@@ -49,7 +49,7 @@ interface CocktailApi {
     @GET("/cocktails")
     suspend fun getCocktailsCountByNameAndTags(
         @Query("name_like") name: String = "",
-        @Query("tags_like") tag: String = "",
+        @Query("tags_like") tags: String = "",
         @Query("name_regex_flags") flags: String = "i"
     ): List<CocktailDto>
 }

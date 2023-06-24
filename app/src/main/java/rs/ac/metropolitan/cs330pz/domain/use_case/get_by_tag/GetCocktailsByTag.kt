@@ -13,11 +13,11 @@ import javax.inject.Inject
 class GetCocktailsByTag @Inject constructor(
     private val repository: CocktailRepository
 ) {
-    operator fun invoke(tag: String) : Flow<Resource<List<Cocktail>>> = flow {
+    operator fun invoke(tags: String) : Flow<Resource<List<Cocktail>>> = flow {
 
         try {
             emit(Resource.Loading<List<Cocktail>>())
-            val cocktailes = repository.getCocktailsByTag(tag).map {
+            val cocktailes = repository.getCocktailsByTag(tags).map {
                 it.toCocktail()
             }
             emit(Resource.Success<List<Cocktail>>(cocktailes))

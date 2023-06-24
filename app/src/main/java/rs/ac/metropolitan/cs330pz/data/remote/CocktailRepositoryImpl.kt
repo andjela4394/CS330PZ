@@ -1,5 +1,6 @@
 package rs.ac.metropolitan.cs330pz.data.remote
 
+import android.util.Log
 import rs.ac.metropolitan.cs330pz.data.remote.dto.CocktailDto
 import rs.ac.metropolitan.cs330pz.domain.repository.CocktailRepository
 import javax.inject.Inject
@@ -27,19 +28,20 @@ class CocktailRepositoryImpl @Inject constructor(
         name: String,
         page: Int
     ): List<CocktailDto> {
-        return cocktailApi.getCocktailsByNameAndTags(tag = tags, name = name, page = page)
+        return cocktailApi.getCocktailsByNameAndTags(tags = tags, name = name, page = page)
     }
 
-    override suspend fun getCocktailsByTag(tag: String): List<CocktailDto> {
-        return cocktailApi.getCocktailsByTag(tag)
+    override suspend fun getCocktailsByTag(tags: String): List<CocktailDto> {
+        return cocktailApi.getCocktailsByTag(tags)
     }
 
     override suspend fun getCocktailCountByNameAndTags(tags: String, name: String): Int {
         val response = cocktailApi.getCocktailsCountByNameAndTags(
-            tag = tags,
+            tags = tags,
             name = name,
         )
         val count = response.size
+        Log.d("CocktailMainScreen","Count $count")
         return count
     }
 
