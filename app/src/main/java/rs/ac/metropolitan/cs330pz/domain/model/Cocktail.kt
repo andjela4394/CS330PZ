@@ -5,5 +5,6 @@ data class Cocktail(
     val id: Int,
     val name: String,
     val strength: Int,
-    val tags: List<String>
+    val tags: List<String>,
+    val imageUrl: String
 )

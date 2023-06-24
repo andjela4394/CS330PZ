@@ -15,5 +15,6 @@ data class CocktailDetail (
     val origin: String,
     val strength: Int,
     @TypeConverters(StringListTypeConverter::class)
-    val tags: List<String>
+    val tags: List<String>,
+    val imageUrl: String
 )

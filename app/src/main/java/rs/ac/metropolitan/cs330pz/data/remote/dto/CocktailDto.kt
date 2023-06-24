@@ -10,7 +10,8 @@ data class CocktailDto(
     val name: String,
     val origin: String,
     val strength: Int,
-    val tags: List<String>
+    val tags: List<String>,
+    val imageUrl: String
 )
 
 fun CocktailDto.toCocktail(): Cocktail {
@@ -18,7 +19,8 @@ fun CocktailDto.toCocktail(): Cocktail {
        id = id,
        name = name,
        strength = strength,
-       tags = tags
+       tags = tags,
+       imageUrl = imageUrl
    )
 }
 
@@ -30,6 +32,7 @@ fun CocktailDto.toCocktailDetail(): CocktailDetail {
         name = name,
         origin = origin,
         strength = strength,
-        tags = tags
+        tags = tags,
+        imageUrl = imageUrl
     )
 }
