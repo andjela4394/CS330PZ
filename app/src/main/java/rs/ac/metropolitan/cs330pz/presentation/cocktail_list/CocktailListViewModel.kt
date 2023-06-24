@@ -12,11 +12,17 @@ import kotlinx.coroutines.flow.onEach
 import rs.ac.metropolitan.cs330pz.common.Resource
 import rs.ac.metropolitan.cs330pz.domain.use_case.getAll.GetAllUseCase
 import rs.ac.metropolitan.cs330pz.domain.use_case.getCocktailsByName.GetCocktailsByNameUseCase
+import rs.ac.metropolitan.cs330pz.domain.use_case.get_by_tag.GetCocktailsByTag
+import rs.ac.metropolitan.cs330pz.domain.use_case.get_cocktail_search.GetCocktailCountUseCase
+import rs.ac.metropolitan.cs330pz.domain.use_case.get_cocktail_search.GetCocktailSearch
 import javax.inject.Inject
 
 @HiltViewModel
 class CocktailListViewModel @Inject constructor(
-    private val getAll: GetAllUseCase
+    private val getAll: GetAllUseCase,
+    private val getCocktailCountUseCase: GetCocktailCountUseCase,
+    private val getCocktailSearch: GetCocktailSearch,
+    private val getCocktailsByTag: GetCocktailsByTag
 ) : ViewModel() {
 
     var tabIndex by mutableStateOf(2)
@@ -26,6 +32,8 @@ class CocktailListViewModel @Inject constructor(
     init {
         getAllCocktails()
     }
+
+    private var dataLoadingCounter = 0
 
     fun refresh(){
         getAllCocktails()
@@ -39,6 +47,78 @@ class CocktailListViewModel @Inject constructor(
         getAll()
     }
 
+    fun getSearchCount(){
+        getCocktailCountUseCase(
+            tags=_state.value.searchTags,
+            name = _state.value.searchString,
+        ).onEach {
+                result->
+            when(result){
+                is Resource.Success -> {
+                    _state.value = _state.value.copy(
+                        searchCount = result.data?: 0
+                    )
+                    decrementDataLoadingCounter()
+                }
+                is Resource.Error -> {
+                    _state.value = _state.value.copy(
+                        error = result.message?: "An unexpected error occurred"
+                    )
+                }
+                is Resource.Loading -> {
+                    _state.value = _state.value.copy(
+                        isLoading = true
+                    )
+                }
+            }
+        }.launchIn(viewModelScope)
+    }
+
+    fun searchCocktail(
+
+        tags:String = _state.value.searchTags,
+        name: String = _state.value.searchString,
+        page: Int = 1){
+        tabIndex = 0
+        _state.value = _state.value.copy(
+            searchTags = tags,
+            searchString = name
+        )
+        getSearchCount()
+        getCocktailSearch(
+            tags=_state.value.searchTags,
+            name = _state.value.searchString,
+            page=page).onEach {
+                result->
+            when(result){
+                is Resource.Success -> {
+                    _state.value = _state.value.copy(
+                        search_cocktail = result.data?: emptyList()
+                    )
+                    decrementDataLoadingCounter()
+                }
+                is Resource.Error -> {
+                    _state.value = _state.value.copy(
+                        error = result.message?: "An unexpected error occurred"
+                    )
+                }
+                is Resource.Loading -> {
+                    _state.value = _state.value.copy(
+                        isLoading = true
+                    )
+                }
+            }
+        }.launchIn(viewModelScope)
+    }
+
+    private fun decrementDataLoadingCounter() {
+        dataLoadingCounter--
+        if (dataLoadingCounter <= 0) {
+            _state.value = _state.value.copy(
+                isLoading = false
+            )
+        }
+    }
 
     private fun getAllCocktails() {
         getAll().onEach { result ->

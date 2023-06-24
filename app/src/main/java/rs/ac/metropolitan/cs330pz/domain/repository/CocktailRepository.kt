@@ -9,5 +9,10 @@ interface CocktailRepository {
     suspend fun getCocktailsByName(name: String): List<CocktailDto>
 
     suspend fun getCocktailById(cocktailId: Int): CocktailDto
+    suspend fun getCocktailsByNameAndTags(tags: String, name:String, page: Int): List<CocktailDto>
+
+    suspend fun getCocktailsByTag(tag: String): List<CocktailDto>
+
+    suspend fun getCocktailCountByNameAndTags(tags: String, name:String): Int
 
 }

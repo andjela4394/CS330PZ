@@ -6,8 +6,8 @@ data class CocktailListState (
     val isLoading: Boolean = false,
     val cocktails: List<Cocktail> = emptyList(),
     val error: String = "",
-    val search_anime: List<Cocktail> = emptyList(),
+    val search_cocktail: List<Cocktail> = emptyList(),
     val searchString:String = "",
-    val searchTags:String = ""
-
+    val searchTags:String = "",
+    val searchCount:Int =0
 )
