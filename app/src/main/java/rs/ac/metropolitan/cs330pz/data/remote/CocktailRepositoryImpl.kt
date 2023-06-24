@@ -2,6 +2,7 @@ package rs.ac.metropolitan.cs330pz.data.remote
 
 import android.util.Log
 import rs.ac.metropolitan.cs330pz.data.remote.dto.CocktailDto
+import rs.ac.metropolitan.cs330pz.domain.model.CocktailDetail
 import rs.ac.metropolitan.cs330pz.domain.repository.CocktailRepository
 import javax.inject.Inject
 
@@ -43,6 +44,10 @@ class CocktailRepositoryImpl @Inject constructor(
         val count = response.size
         Log.d("CocktailMainScreen","Count $count")
         return count
+    }
+
+    override suspend fun uploadNewCocktail(newCocktail: CocktailDetail) {
+        cocktailApi.uploadNewCocktail(newCocktail)
     }
 
 

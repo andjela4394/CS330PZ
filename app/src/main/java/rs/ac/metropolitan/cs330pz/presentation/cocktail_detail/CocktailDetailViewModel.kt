@@ -9,6 +9,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import rs.ac.metropolitan.cs330pz.common.Constants
 import rs.ac.metropolitan.cs330pz.common.Resource
 import rs.ac.metropolitan.cs330pz.domain.use_case.getCocktailById.GetCocktailByIdUseCase
@@ -28,6 +29,7 @@ class CocktailDetailViewModel @Inject constructor(
             getCocktail(cocktailId.toInt())
         }
     }
+
 
     private fun getCocktail(cocktailId: Int) {
         getCocktailByIdUseCase(cocktailId).onEach { result ->

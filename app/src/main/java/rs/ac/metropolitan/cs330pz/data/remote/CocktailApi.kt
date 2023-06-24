@@ -1,9 +1,12 @@
 package rs.ac.metropolitan.cs330pz.data.remote
 
+import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
 import rs.ac.metropolitan.cs330pz.data.remote.dto.CocktailDto
+import rs.ac.metropolitan.cs330pz.domain.model.CocktailDetail
 
 
 interface CocktailApi {
@@ -52,4 +55,7 @@ interface CocktailApi {
         @Query("tags_like") tags: String = "",
         @Query("name_regex_flags") flags: String = "i"
     ): List<CocktailDto>
+
+    @POST("/cocktails")
+    suspend fun uploadNewCocktail(@Body newCocktail: CocktailDetail)
 }

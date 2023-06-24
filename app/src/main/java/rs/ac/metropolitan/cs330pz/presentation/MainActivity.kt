@@ -12,8 +12,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.compose.AppTheme
 import dagger.hilt.android.AndroidEntryPoint
+import rs.ac.metropolitan.cs330pz.presentation.cocktail_add.CocktailAddScreen
 import rs.ac.metropolitan.cs330pz.presentation.cocktail_detail.CocktailDetailScreen
-import rs.ac.metropolitan.cs330pz.presentation.cocktail_list.components.CocktailMainListItem
 import rs.ac.metropolitan.cs330pz.presentation.cocktail_list.components.CocktailMainScreen
 
 @AndroidEntryPoint
@@ -41,7 +41,12 @@ class MainActivity : ComponentActivity() {
                         composable(
                             route = Screen.CocktailDetailScreen.route + "/{cocktailId}"
                         ) {
-                            CocktailDetailScreen()
+                            CocktailDetailScreen(navController = navController)
+                        }
+                        composable(
+                            route = Screen.CocktailAddScreen.route
+                        ){
+                            CocktailAddScreen(navController = navController)
                         }
                     }
                 }

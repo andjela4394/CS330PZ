@@ -2,6 +2,7 @@ package rs.ac.metropolitan.cs330pz.domain.repository
 
 import rs.ac.metropolitan.cs330pz.data.remote.dto.CocktailDto
 import rs.ac.metropolitan.cs330pz.domain.model.Cocktail
+import rs.ac.metropolitan.cs330pz.domain.model.CocktailDetail
 
 interface CocktailRepository {
 
@@ -14,5 +15,7 @@ interface CocktailRepository {
     suspend fun getCocktailsByTag(tags: String): List<CocktailDto>
 
     suspend fun getCocktailCountByNameAndTags(tags: String, name:String): Int
+
+    suspend fun uploadNewCocktail(newCocktail: CocktailDetail)
 
 }

@@ -29,6 +29,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -119,8 +120,8 @@ fun CocktailSearchDialog (
 
             item {
                 Column {
-                    val rows = (tags.size + 2) / 3
-                    val columns = 3
+                    val rows = (tags.size + 1) / 2
+                    val columns = 2
 
                     val chunkedTags = tags.chunked(columns)
 
@@ -146,7 +147,7 @@ fun CocktailSearchDialog (
                                     )
                                     Text(
                                         text = tag,
-                                        modifier = Modifier.padding(start = 4.dp)
+                                        modifier = Modifier.padding(start = 4.dp),
                                     )
                                 }
                             }

@@ -32,7 +32,6 @@ fun CocktailMainListItem(
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
-        NavBar(navController = navController)
 
         LazyColumn(
             modifier = Modifier

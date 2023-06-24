@@ -18,27 +18,43 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.ArrowBack
+import androidx.compose.material.icons.outlined.Favorite
+import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import coil.compose.rememberImagePainter
+import rs.ac.metropolitan.cs330pz.presentation.Screen
 
 @Composable
 fun CocktailDetailScreen(
-    viewModel: CocktailDetailViewModel = hiltViewModel()
+    viewModel: CocktailDetailViewModel = hiltViewModel(),
+    navController: NavController,
+    modifier: Modifier = Modifier.padding(top = 20.dp)
 ) {
     val state = viewModel.state.value
+    var isFavorite by remember { mutableStateOf<Boolean>(false) }
 
     Card(
         elevation = CardDefaults.cardElevation(
@@ -50,6 +66,46 @@ fun CocktailDetailScreen(
             .fillMaxWidth()
             .padding(horizontal = 24.dp)
     ) {
+        Box(modifier = Modifier.fillMaxWidth()) {
+            IconButton(
+                modifier = Modifier
+                    .background(Color.Transparent)
+                    .scale(1.5f),
+                onClick = {
+                    navController.popBackStack()
+                }) {
+                Icon(
+                    imageVector = Icons.Outlined.ArrowBack,
+                    contentDescription = "Back",
+                    tint = MaterialTheme.colorScheme.primary
+                )
+            }
+            Text(
+                text = "Cocktail List",
+                style = MaterialTheme.typography.titleLarge,
+                color = MaterialTheme.colorScheme.onPrimaryContainer,
+                modifier = Modifier.align(
+                    Alignment.Center
+                )
+            )
+
+            IconButton(
+                modifier = Modifier
+                    .scale(1.5f)
+                    .align(Alignment.BottomEnd),
+                onClick = {
+                    //viewModel.onEvent(AnimeDetailEvent.SaveAnimeDetail)
+                    navController.navigate(Screen.CocktailMainScreen.route)
+                    isFavorite = !isFavorite
+
+                }){
+                Icon(
+                    imageVector = if (isFavorite) Icons.Outlined.Favorite else Icons.Outlined.FavoriteBorder,
+                    contentDescription = "Favorite",
+                    tint = MaterialTheme.colorScheme.primary
+                )
+            }
+        }
         Box(modifier = Modifier.fillMaxSize()) {
             if (state.isLoading) {
                 CircularProgressIndicator(

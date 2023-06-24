@@ -22,6 +22,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -58,7 +59,7 @@ fun CocktailSearchItemList(
     ) {
         LazyColumn(
             modifier = Modifier
-                .width(360.dp)
+                .width(500.dp)
                 .padding(16.dp)
         ) {
             items(cocktailList) { cocktail ->
@@ -74,7 +75,9 @@ fun CocktailSearchItemList(
             item {
                 Spacer(modifier = Modifier.height(5.dp))
                 Row(
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(15.dp),
                     horizontalArrangement = Arrangement.Center
                 ) {
                     Spacer(modifier = Modifier.padding(10.dp))
@@ -89,9 +92,12 @@ fun CocktailSearchItemList(
                     ) {
                         Text(text = "Backward")
                     }
-
-                    Text(text = "Page ${currentPage} of ${viewModel.state.value.searchCount/10 + 1}")
-
+                    Spacer(modifier = Modifier.padding(10.dp))
+                    Text(
+                        text = "Page ${currentPage}/${viewModel.state.value.searchCount/10 + 1}",
+                        modifier = Modifier.padding(top=10.dp)
+                    )
+                    Spacer(modifier = Modifier.padding(10.dp))
                     Button(
                         onClick = {
                             if (currentPage < viewModel.state.value.searchCount/10 + 1) {
@@ -103,6 +109,8 @@ fun CocktailSearchItemList(
                     ) {
                         Text(text = "Forward")
                     }
+
+
                 }
             }
         }

@@ -20,6 +20,7 @@ fun CocktailDto.toCocktail(): Cocktail {
        name = name,
        strength = strength,
        tags = tags,
+       ingredients = ingredients,
        imageUrl = imageUrl
    )
 }
