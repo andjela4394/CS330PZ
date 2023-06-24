@@ -15,6 +15,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.outlined.ArrowBack
+import androidx.compose.material.icons.outlined.Favorite
+import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -40,6 +43,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import rs.ac.metropolitan.cs330pz.domain.model.CocktailDetail
+import rs.ac.metropolitan.cs330pz.presentation.Screen
 import rs.ac.metropolitan.cs330pz.presentation.nav_bar.CocktailNavBarViewModel
 import rs.ac.metropolitan.cs330pz.presentation.cocktail_list.CocktailListViewModel
 import java.util.UUID
@@ -61,6 +65,30 @@ fun CocktailAddScreen(
     var tags by remember { mutableStateOf(TextFieldValue("")) }
     var imageUrl by remember { mutableStateOf(TextFieldValue("")) }
 
+    Box(modifier = Modifier.fillMaxWidth()) {
+        IconButton(
+            modifier = Modifier
+                .background(Color.Transparent)
+                .scale(1.5f),
+            onClick = {
+                navController.popBackStack()
+            }) {
+            Icon(
+                imageVector = Icons.Outlined.ArrowBack,
+                contentDescription = "Back",
+                tint = MaterialTheme.colorScheme.primary
+            )
+        }
+        Text(
+            text = "Add new cocktail",
+            style = MaterialTheme.typography.titleLarge,
+            color = MaterialTheme.colorScheme.onPrimaryContainer,
+            modifier = Modifier.align(
+                Alignment.Center
+            )
+        )
+
+    }
     Column(
         modifier = Modifier
             .fillMaxSize()

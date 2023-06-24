@@ -42,19 +42,30 @@ fun CocktailMainScreen (
                     Icon(Icons.Filled.Add, contentDescription = "Add student")
                 }
             }) {
-            CocktailMainListItem(navController, viewModel)
+            //CocktailMainListItem(navController, viewModel)
+            if (navViewModel.state.value.dialog) {
+                CocktailSearchDialog()
+            } else if (navViewModel.state.value.isSearching) {
+                CocktailSearchItemList(
+                    viewModel.state.value.search_cocktail,
+                    "Searched",
+                    navController = navController
+                )
+            } else if (navViewModel.state.value.isMainPage && !navViewModel.state.value.isSearching) {
+                CocktailMainListItem(navController = navController)
+            }
         }
-        if (navViewModel.state.value.dialog) {
-            CocktailSearchDialog()
-        } else if (navViewModel.state.value.isSearching) {
-            CocktailSearchItemList(
-                viewModel.state.value.search_cocktail,
-                "Searched",
-                navController = navController
-            )
-        } else if (navViewModel.state.value.isMainPage && !navViewModel.state.value.isSearching) {
-            CocktailMainListItem(navController = navController)
-        }
+//        if (navViewModel.state.value.dialog) {
+//            CocktailSearchDialog()
+//        } else if (navViewModel.state.value.isSearching) {
+//            CocktailSearchItemList(
+//                viewModel.state.value.search_cocktail,
+//                "Searched",
+//                navController = navController
+//            )
+//        } else if (navViewModel.state.value.isMainPage && !navViewModel.state.value.isSearching) {
+//            CocktailMainListItem(navController = navController)
+//        }
 
     }
 }
