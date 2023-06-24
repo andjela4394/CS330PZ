@@ -1,7 +1,9 @@
 package rs.ac.metropolitan.cs330pz.presentation.cocktail_list.components
 
+import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -19,10 +21,6 @@ fun CocktailMainScreen (
     navViewModel: CocktailNavBarViewModel = hiltViewModel()
     ){
 
-    Column(modifier = Modifier.fillMaxSize()
-    ) {
-        NavBar(navController = navController)
-
 
         if (navViewModel.state.value.dialog){
             CocktailSearchDialog()
@@ -35,4 +33,3 @@ fun CocktailMainScreen (
         }
 
     }
-}

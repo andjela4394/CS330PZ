@@ -33,7 +33,7 @@ import rs.ac.metropolitan.cs330pz.presentation.cocktail_list.components.Cocktail
 @Composable
 fun CocktailSearchItemList(
     cocktailList: List<Cocktail>,
-    title: String,
+    name: String,
     viewModel: CocktailListViewModel = hiltViewModel(),
     navController: NavController
 ) {
@@ -41,7 +41,7 @@ fun CocktailSearchItemList(
     var currentPage by remember { mutableStateOf(1) }
 
     Text(
-        text = title + " cocktail",
+        text = name + " cocktail",
         fontSize = 35.sp,
         modifier = Modifier.padding(
             top = 10.dp,

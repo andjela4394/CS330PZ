@@ -25,6 +25,7 @@ fun NavBar(
     navController: NavController,
 
     ) {
+
     val tabs = listOf("Find", "Favorites", "Viewed")
 
 

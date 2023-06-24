@@ -1,5 +1,6 @@
 package rs.ac.metropolitan.cs330pz.presentation.cocktail_list.components
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -18,30 +19,39 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import rs.ac.metropolitan.cs330pz.presentation.cocktail_list.CocktailListViewModel
+import rs.ac.metropolitan.cs330pz.presentation.nav_bar.NavBar
 
 @Composable
 fun CocktailMainListItem(
     navController: NavController,
     viewModel: CocktailListViewModel = hiltViewModel()
 ) {
+
     val state = viewModel.state.value
-    LazyColumn(modifier = Modifier
-            .fillMaxSize()
-            .padding(horizontal = 16.dp)
-            .padding(vertical = 20.dp)
-    )
-    {
-        itemsIndexed(state.cocktails) { index, cocktail ->
-            CocktailMainItem(
-                cocktail = cocktail,
-                onItemClick = {
-                    navController.navigate(Screen.CocktailDetailScreen.route + "/${cocktail.id}")
-                }
-            )
-            Spacer(modifier = Modifier.height(20.dp))
+
+    Column(
+        modifier = Modifier.fillMaxSize()
+    ) {
+        NavBar(navController = navController)
+
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 16.dp)
+                .padding(vertical = 20.dp)
+        )
+        {
+            itemsIndexed(state.cocktails) { index, cocktail ->
+                CocktailMainItem(
+                    cocktail = cocktail,
+                    onItemClick = {
+                        navController.navigate(Screen.CocktailDetailScreen.route + "/${cocktail.id}")
+                    }
+                )
+                Spacer(modifier = Modifier.height(20.dp))
+            }
         }
-    }
-        if(state.error.isNotBlank()) {
+        if (state.error.isNotBlank()) {
             Text(
                 text = state.error,
                 color = MaterialTheme.colorScheme.error,
@@ -51,7 +61,8 @@ fun CocktailMainListItem(
                     .padding(horizontal = 20.dp)
             )
         }
-        if(state.isLoading) {
+        if (state.isLoading) {
             CircularProgressIndicator(modifier = Modifier)
         }
     }
+}

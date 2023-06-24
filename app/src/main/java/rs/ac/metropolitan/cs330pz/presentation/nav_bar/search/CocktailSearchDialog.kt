@@ -46,23 +46,29 @@ fun CocktailSearchDialog (
     var selectedTags by remember { mutableStateOf(emptyList<String>()) }
 
 
-    var title by remember { mutableStateOf(TextFieldValue("")) }
+    var name by remember { mutableStateOf(TextFieldValue("")) }
     val tags = listOf(
-        "action",
-        "school",
-        "comedy",
-        "drama",
-        "sci-fi",
-        "mecha",
-        "yandere",
-        "mystery",
-        "isekai",
-        "fantasy",
-        "military",
-        "music",
-        "war",
-        "historical",
-        "slice of life"
+        "Alchocolic",
+        "Classic",
+        "Strong",
+        "Citrus",
+        "Bitter",
+        "Mint",
+        "Tropical",
+        "Creamy",
+        "Sour",
+        "Sweet",
+        "Tiki",
+        "Exotic",
+        "Brunch",
+        "Spicy",
+        "Simple",
+        "Refreshing",
+        "Fruity",
+        "Mixed",
+        "Sparkling",
+        "Non-alcoholic",
+        "Tangy"
     )
 
     Card(
@@ -102,9 +108,9 @@ fun CocktailSearchDialog (
             }
             item {
                 TextField(
-                    value = title,
+                    value = name,
                     onValueChange = { newText ->
-                        title = newText
+                        name = newText
                     },
                     label = { Text("Cocktail name") },
                     placeholder = { Text("Enter the cocktail name") },
@@ -116,9 +122,9 @@ fun CocktailSearchDialog (
                     val rows = (tags.size + 2) / 3
                     val columns = 3
 
-                    val chunkedGenres = tags.chunked(columns)
+                    val chunkedTags = tags.chunked(columns)
 
-                    chunkedGenres.forEach { rowTags ->
+                    chunkedTags.forEach { rowTags ->
                         Row(
                             modifier = Modifier.padding(vertical = 4.dp),
                             horizontalArrangement = Arrangement.SpaceBetween
@@ -151,10 +157,10 @@ fun CocktailSearchDialog (
             item {
                 Button(onClick = {
                     val selectedTagsString = selectedTags.joinToString(",")
-                    //viewModel.getSearchCount()
-                    //viewModel.searchCocktail(
-                     //   tags = selectedTagsString, title = title.text
-                    //)
+                    viewModel.getSearchCount()
+                    viewModel.searchCocktail(
+                        tags = selectedTagsString, name = name.text
+                    )
                     navViewModel.closeDialogSearch()
 
                 }) {
