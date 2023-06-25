@@ -33,6 +33,7 @@ fun CocktailMainItem(
     modifier: Modifier = Modifier,
     onItemClick: (Cocktail) -> Unit
 ) {
+
     Card(
         elevation = CardDefaults.cardElevation(
             defaultElevation = 18.dp
@@ -41,7 +42,8 @@ fun CocktailMainItem(
             .clickable { onItemClick(cocktail) }
             .fillMaxSize()
             .width(280.dp)
-            .background(color = MaterialTheme.colorScheme.onSurfaceVariant)
+            .background(color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
             .clickable {
                 onItemClick(cocktail)
             }, shape = MaterialTheme.shapes.large,

@@ -25,6 +25,6 @@ interface CocktailDetailDao {
     @Query("SELECT * FROM cocktaildetail WHERE id = :cocktailId")
     fun getCocktailById(cocktailId: Int): Flow<CocktailDetail>
 
-    @Query("SELECT * FROM cocktaildetail WHERE favorite=1")
+    @Query("SELECT * FROM cocktaildetail WHERE favorite = 1")
     fun getFavoriteCocktailDetails(): Flow<List<CocktailDetail>>
 }

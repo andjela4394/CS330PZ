@@ -9,5 +9,6 @@ data class CocktailListState (
     val search_cocktail: List<Cocktail> = emptyList(),
     val searchString:String = "",
     val searchTags:String = "",
+    val searchIngredients:String = "",
     val searchCount:Int =0
 )

@@ -10,8 +10,7 @@ class AddCocktailToDatabaseUseCase @Inject constructor (
         ){
 
     suspend operator fun invoke(cocktailDetail: CocktailDetail){
-        Log.d("CocktailDetailScreen", "Uslo u use case")
-        cocktailDetail.favorite=true
+        //cocktailDetail.favorite=true
         repository.insertNewCocktail(cocktailDetail)
     }
 }

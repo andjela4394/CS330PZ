@@ -19,5 +19,5 @@ data class CocktailDetail (
     @TypeConverters(StringListTypeConverter::class)
     val tags: List<String>,
     val imageUrl: String,
-    var favorite: Boolean = false
+    var favorite: Boolean?
 )

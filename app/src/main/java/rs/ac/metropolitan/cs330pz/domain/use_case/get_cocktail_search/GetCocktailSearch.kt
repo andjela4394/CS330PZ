@@ -14,11 +14,11 @@ class GetCocktailSearch @Inject constructor(
     private val repository: CocktailRepository
 ) {
 
-    operator fun invoke(tags: String ="",name :String="",page:Int = 1) : Flow<Resource<List<Cocktail>>> = flow {
+    operator fun invoke(tags: String ="",name :String="", ingredients:String ="",page:Int = 1) : Flow<Resource<List<Cocktail>>> = flow {
 
         try {
             emit(Resource.Loading<List<Cocktail>>())
-            val cocktails = repository.getCocktailsByNameAndTags(tags=tags,name=name,page=page).map {
+            val cocktails = repository.getCocktailsByNameAndTags(tags=tags,ingredients=ingredients,name=name,page=page).map {
                 it.toCocktail()
             }
             emit(Resource.Success<List<Cocktail>>(cocktails))

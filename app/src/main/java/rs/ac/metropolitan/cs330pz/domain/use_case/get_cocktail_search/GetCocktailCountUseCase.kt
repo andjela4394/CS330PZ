@@ -12,11 +12,11 @@ class GetCocktailCountUseCase @Inject constructor(
     private val repository: CocktailRepository
 ) {
 
-    operator fun invoke(tags: String ="",name :String="") : Flow<Resource<Int>> = flow {
+    operator fun invoke(tags: String ="",ingredients:String ="", name :String="") : Flow<Resource<Int>> = flow {
 
         try {
             emit(Resource.Loading())
-            val cocktails = repository.getCocktailCountByNameAndTags(tags=tags,name=name)
+            val cocktails = repository.getCocktailCountByNameAndTags(tags = tags, ingredients = ingredients, name = name)
             emit(Resource.Success(cocktails))
         }
         catch (e: HttpException){

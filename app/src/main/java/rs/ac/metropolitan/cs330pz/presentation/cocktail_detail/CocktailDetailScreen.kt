@@ -59,7 +59,7 @@ fun CocktailDetailScreen(
     modifier: Modifier = Modifier.padding(top = 20.dp)
 ) {
     val state = viewModel.state.value
-    var isFavorite by remember { mutableStateOf<Boolean>(false) }
+    var isFavorite = viewModel.state.value.isFavorite
     val coroutineScope = rememberCoroutineScope()
     var expanded by remember { mutableStateOf(false) }
 
@@ -74,6 +74,7 @@ fun CocktailDetailScreen(
             .padding(horizontal = 24.dp)
     ) {
         Box(modifier = Modifier.fillMaxWidth()) {
+          //  Log.d("CocktailDetailScreen", "Fav na pocetku${isFavorite}")
             IconButton(
                 modifier = Modifier
                     .background(Color.Transparent)
@@ -104,12 +105,10 @@ fun CocktailDetailScreen(
                     coroutineScope.launch{
                         viewModel.addCocktailToDatabase()
                     }
-                   // navController.navigate(Screen.CocktailMainScreen.route)
-                    isFavorite = !isFavorite
-
+                    viewModel.favourite()
                 }){
                 Icon(
-                    imageVector = if (isFavorite) Icons.Outlined.Favorite else Icons.Outlined.FavoriteBorder,
+                    imageVector = if (isFavorite == true) Icons.Outlined.Favorite else Icons.Outlined.FavoriteBorder,
                     contentDescription = "Favorite",
                     tint = MaterialTheme.colorScheme.primary
                 )

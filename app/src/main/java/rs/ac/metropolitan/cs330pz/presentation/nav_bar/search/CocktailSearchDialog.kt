@@ -48,6 +48,7 @@ fun CocktailSearchDialog (
 
 
     var name by remember { mutableStateOf(TextFieldValue("")) }
+    var ingredient by remember { mutableStateOf(TextFieldValue("")) }
     val tags = listOf(
         "Alcoholic",
         "Classic",
@@ -116,6 +117,14 @@ fun CocktailSearchDialog (
                     label = { Text("Cocktail name") },
                     placeholder = { Text("Enter the cocktail name") },
                 )
+                TextField(
+                    value = ingredient,
+                    onValueChange = { newText ->
+                        ingredient = newText
+                    },
+                    label = { Text("Cocktail ingredient") },
+                    placeholder = { Text("Enter the cocktail ingredient") },
+                )
             }
 
             item {
@@ -160,7 +169,7 @@ fun CocktailSearchDialog (
                     val selectedTagsString = selectedTags.joinToString(",")
                     viewModel.getSearchCount()
                     viewModel.searchCocktail(
-                        tags = selectedTagsString, name = name.text
+                        tags = selectedTagsString, name = name.text, ingredients = ingredient.text
                     )
                     navViewModel.closeDialogSearch()
 

@@ -156,7 +156,8 @@ fun CocktailAddScreen(
                     origin = origin.text,
                     strength = strength.text.toInt(),
                     imageUrl = imageUrl.text,
-                    id = vm.generateRandomId()
+                    id = vm.generateRandomId(),
+                    favorite = null
                 )
                 vm.submitCocktail(newCocktail)
                 navController.popBackStack()

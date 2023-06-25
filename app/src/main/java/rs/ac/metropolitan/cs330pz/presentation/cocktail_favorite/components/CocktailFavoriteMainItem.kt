@@ -51,7 +51,7 @@ fun CocktailFavoriteMainItem(
             painter = rememberAsyncImagePainter(model = cocktail.imageUrl),
             contentDescription = null,
             modifier = Modifier
-                .height(300.dp)
+                .height(350.dp)
                 .size(310.dp)
                 .padding(5.dp)
                 .padding(top = 20.dp)

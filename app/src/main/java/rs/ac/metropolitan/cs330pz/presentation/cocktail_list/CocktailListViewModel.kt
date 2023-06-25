@@ -50,6 +50,7 @@ class CocktailListViewModel @Inject constructor(
     fun getSearchCount(){
         getCocktailCountUseCase(
             tags=_state.value.searchTags,
+            ingredients = _state.value.searchIngredients,
             name = _state.value.searchString,
         ).onEach {
                 result->
@@ -78,16 +79,19 @@ class CocktailListViewModel @Inject constructor(
 
         tags:String = _state.value.searchTags,
         name: String = _state.value.searchString,
+        ingredients: String = _state.value.searchIngredients,
         page: Int = 1){
         tabIndex = 0
         _state.value = _state.value.copy(
             searchTags = tags,
-            searchString = name
+            searchString = name,
+            searchIngredients = ingredients
         )
         getSearchCount()
         getCocktailSearch(
             tags=_state.value.searchTags,
             name = _state.value.searchString,
+            ingredients = _state.value.searchIngredients,
             page=page).onEach {
                 result->
             when(result){

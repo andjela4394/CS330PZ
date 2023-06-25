@@ -27,19 +27,21 @@ class CocktailRepositoryImpl @Inject constructor(
 
     override suspend fun getCocktailsByNameAndTags(
         tags: String,
+        ingredients: String,
         name: String,
         page: Int
     ): List<CocktailDto> {
-        return cocktailApi.getCocktailsByNameAndTags(tags = tags, name = name, page = page)
+        return cocktailApi.getCocktailsByNameAndTags(tags = tags, ingredients = ingredients, name = name, page = page)
     }
 
     override suspend fun getCocktailsByTag(tags: String): List<CocktailDto> {
         return cocktailApi.getCocktailsByTag(tags)
     }
 
-    override suspend fun getCocktailCountByNameAndTags(tags: String, name: String): Int {
+    override suspend fun getCocktailCountByNameAndTags(tags: String, ingredients:String, name: String): Int {
         val response = cocktailApi.getCocktailsCountByNameAndTags(
             tags = tags,
+            ingredients = ingredients,
             name = name,
         )
         val count = response.size

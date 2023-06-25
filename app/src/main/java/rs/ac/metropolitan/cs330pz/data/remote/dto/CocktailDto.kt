@@ -34,6 +34,7 @@ fun CocktailDto.toCocktailDetail(): CocktailDetail {
         origin = origin,
         strength = strength,
         tags = tags,
-        imageUrl = imageUrl
+        imageUrl = imageUrl,
+        favorite = null
     )
 }
