@@ -1,6 +1,7 @@
-package rs.ac.metropolitan.cs330pz.data.remote
+package rs.ac.metropolitan.cs330pz.data.repository
 
 import android.util.Log
+import rs.ac.metropolitan.cs330pz.data.remote.CocktailApi
 import rs.ac.metropolitan.cs330pz.data.remote.dto.CocktailDto
 import rs.ac.metropolitan.cs330pz.domain.model.CocktailDetail
 import rs.ac.metropolitan.cs330pz.domain.repository.CocktailRepository

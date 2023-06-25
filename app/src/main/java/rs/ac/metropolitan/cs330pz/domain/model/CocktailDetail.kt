@@ -2,7 +2,7 @@ package rs.ac.metropolitan.cs330pz.domain.model
 
 import androidx.room.Entity
 import androidx.room.TypeConverters
-import rs.ac.metropolitan.cs330pz.data.remote.converters.StringListTypeConverter
+import rs.ac.metropolitan.cs330pz.data.local.converters.StringListTypeConverter
 import rs.ac.metropolitan.cs330pz.data.remote.dto.CocktailDto
 
 @Entity
@@ -16,5 +16,6 @@ data class CocktailDetail (
     val strength: Int,
     @TypeConverters(StringListTypeConverter::class)
     val tags: List<String>,
-    val imageUrl: String
+    val imageUrl: String,
+    val favorite: Boolean = false
 )

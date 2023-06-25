@@ -26,12 +26,12 @@ fun NavBar(
 
     ) {
 
-    val tabs = listOf("Find", "Favorites", "Viewed")
+    val tabs = listOf("Explore", "Favorites", "History")
 
 
     Column(modifier = Modifier.fillMaxWidth()) {
         TopAppBar(
-            title = { Text("Cocktail List") },
+            title = { Text("Cocktail Explorer") },
             actions = {
                 IconButton(onClick = {viewModel.dialog() }) {
                     Icon(Icons.Default.Search, contentDescription = "Search")

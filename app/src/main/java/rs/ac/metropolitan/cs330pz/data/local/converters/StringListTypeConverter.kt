@@ -1,4 +1,4 @@
-package rs.ac.metropolitan.cs330pz.data.remote.converters
+package rs.ac.metropolitan.cs330pz.data.local.converters
 
 import androidx.room.TypeConverter
 
