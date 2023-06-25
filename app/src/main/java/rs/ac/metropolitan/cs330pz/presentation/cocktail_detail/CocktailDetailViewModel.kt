@@ -60,7 +60,7 @@ class CocktailDetailViewModel @Inject constructor(
                 if(it.favorite == null){
                     it.favorite = false
                 }
-                Log.d("CocktailDetailScreen", "Uslo na clic")
+                Log.d("CocktailDetailScreen", "Uslo na click")
                 var helper: Boolean = it.favorite!!
                 it.favorite = !helper
                 addCocktailToDatabaseUseCase(it)
