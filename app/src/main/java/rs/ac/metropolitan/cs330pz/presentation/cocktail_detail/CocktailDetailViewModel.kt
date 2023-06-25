@@ -12,12 +12,14 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import rs.ac.metropolitan.cs330pz.common.Constants
 import rs.ac.metropolitan.cs330pz.common.Resource
+import rs.ac.metropolitan.cs330pz.domain.use_case.database_use_cases.add_cocktail.AddCocktailToDatabaseUseCase
 import rs.ac.metropolitan.cs330pz.domain.use_case.getCocktailById.GetCocktailByIdUseCase
 import javax.inject.Inject
 
 @HiltViewModel
 class CocktailDetailViewModel @Inject constructor(
     private val getCocktailByIdUseCase: GetCocktailByIdUseCase,
+    private val addCocktailToDatabaseUseCase: AddCocktailToDatabaseUseCase,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
@@ -30,6 +32,16 @@ class CocktailDetailViewModel @Inject constructor(
         }
     }
 
+    suspend fun addCocktailToDatabase(){
+        viewModelScope.launch {
+            //Log.d("CocktailDetailScreen", "Uslo na click")
+            state.value.cocktail?.let{
+                var helper: Boolean = it.favorite
+                it.favorite = !helper
+                addCocktailToDatabaseUseCase(it)
+            }
+        }
+    }
 
     private fun getCocktail(cocktailId: Int) {
         getCocktailByIdUseCase(cocktailId).onEach { result ->

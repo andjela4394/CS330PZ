@@ -1,9 +1,11 @@
 package rs.ac.metropolitan.cs330pz.presentation.cocktail_detail
 
+import android.annotation.SuppressLint
 import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -30,6 +32,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -45,8 +48,10 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.rememberImagePainter
+import kotlinx.coroutines.launch
 import rs.ac.metropolitan.cs330pz.presentation.Screen
 
+@SuppressLint("StateFlowValueCalledInComposition")
 @Composable
 fun CocktailDetailScreen(
     viewModel: CocktailDetailViewModel = hiltViewModel(),
@@ -55,6 +60,8 @@ fun CocktailDetailScreen(
 ) {
     val state = viewModel.state.value
     var isFavorite by remember { mutableStateOf<Boolean>(false) }
+    val coroutineScope = rememberCoroutineScope()
+    var expanded by remember { mutableStateOf(false) }
 
     Card(
         elevation = CardDefaults.cardElevation(
@@ -94,8 +101,10 @@ fun CocktailDetailScreen(
                     .scale(1.5f)
                     .align(Alignment.BottomEnd),
                 onClick = {
-                    //viewModel.onEvent(AnimeDetailEvent.SaveAnimeDetail)
-                    navController.navigate(Screen.CocktailMainScreen.route)
+                    coroutineScope.launch{
+                        viewModel.addCocktailToDatabase()
+                    }
+                   // navController.navigate(Screen.CocktailMainScreen.route)
                     isFavorite = !isFavorite
 
                 }){
@@ -123,7 +132,7 @@ fun CocktailDetailScreen(
                             .size(300.dp)
                             .align(Alignment.CenterHorizontally)
                             .clip(shape = RoundedCornerShape(8.dp))
-                            .aspectRatio(3f/3f)
+                            .aspectRatio(3f / 3f)
                     )
                         Spacer(modifier = Modifier.height(16.dp))
                         Text(
@@ -137,7 +146,10 @@ fun CocktailDetailScreen(
                         Text(
                             text = cocktail.description,
                             style = MaterialTheme.typography.bodyLarge,
-                            modifier = Modifier.align(Alignment.CenterHorizontally),
+                            modifier = Modifier
+                                .align(Alignment.CenterHorizontally)
+                                .height(if (expanded) 200.dp else 50.dp)
+                                .clickable { expanded = !expanded },
                             color = MaterialTheme.colorScheme.onPrimaryContainer
                         )
                         Spacer(modifier = Modifier.height(16.dp))

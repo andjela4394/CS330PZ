@@ -1,4 +1,4 @@
-package rs.ac.metropolitan.cs330pz.presentation.cocktail_list.components
+package rs.ac.metropolitan.cs330pz.presentation.cocktail_favorite.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -26,17 +26,18 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import rs.ac.metropolitan.cs330pz.domain.model.Cocktail
+import rs.ac.metropolitan.cs330pz.domain.model.CocktailDetail
 
 @Composable
-fun CocktailMainItem(
-    cocktail: Cocktail,
+fun CocktailFavoriteMainItem(
+    cocktail: CocktailDetail,
     modifier: Modifier = Modifier,
-    onItemClick: (Cocktail) -> Unit
+    onItemClick: (CocktailDetail) -> Unit
 ) {
     Card(
         elevation = CardDefaults.cardElevation(
             defaultElevation = 18.dp
-        ), 
+        ),
         modifier = modifier
             .clickable { onItemClick(cocktail) }
             .fillMaxSize()

@@ -11,15 +11,6 @@ import rs.ac.metropolitan.cs330pz.domain.model.CocktailDetail
 
 interface CocktailApi {
 
-//
-//    @GET("search.php")
-//    suspend fun searchCocktailsByName(@Query("s") name: String): CocktailsDto
-//
-//    @GET("lookup.php")
-//    suspend fun getCocktailById(@Query("i") idDrink: String): CocktailDto
-//
-//    @GET("filter.php")
-//    suspend fun filterCocktailsByCategory(@Query("c") category: String): CocktailsDto
 
     @GET("/cocktails")
     suspend fun getAll(): List<CocktailDto>

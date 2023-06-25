@@ -2,6 +2,7 @@ package rs.ac.metropolitan.cs330pz.presentation.cocktail_list.components
 
 import android.annotation.SuppressLint
 import android.util.Log
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.icons.Icons
@@ -14,9 +15,11 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import rs.ac.metropolitan.cs330pz.presentation.Screen
+import rs.ac.metropolitan.cs330pz.presentation.cocktail_favorite.components.CocktailFavoriteMainListItem
 import rs.ac.metropolitan.cs330pz.presentation.cocktail_list.CocktailListViewModel
 import rs.ac.metropolitan.cs330pz.presentation.nav_bar.CocktailNavBarViewModel
 import rs.ac.metropolitan.cs330pz.presentation.nav_bar.NavBar
@@ -32,9 +35,14 @@ fun CocktailMainScreen (
     navViewModel: CocktailNavBarViewModel = hiltViewModel()
     ) {
     Column(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
+            .background(color = Color.DarkGray)
     ) {
-        NavBar(navController = navController)
+        Column(modifier = Modifier.background(color = Color.DarkGray)) {
+            NavBar(navController = navController)
+        }
+        //NavBar(navController = navController)
 
         Scaffold(
             floatingActionButton = {
@@ -53,19 +61,10 @@ fun CocktailMainScreen (
                 )
             } else if (navViewModel.state.value.isMainPage && !navViewModel.state.value.isSearching) {
                 CocktailMainListItem(navController = navController)
-            }
+            } else if (navViewModel.state.value.isFavorite && !navViewModel.state.value.isSearching) {
+                 CocktailFavoriteMainListItem(navController = navController)
+             }
         }
-//        if (navViewModel.state.value.dialog) {
-//            CocktailSearchDialog()
-//        } else if (navViewModel.state.value.isSearching) {
-//            CocktailSearchItemList(
-//                viewModel.state.value.search_cocktail,
-//                "Searched",
-//                navController = navController
-//            )
-//        } else if (navViewModel.state.value.isMainPage && !navViewModel.state.value.isSearching) {
-//            CocktailMainListItem(navController = navController)
-//        }
 
     }
 }

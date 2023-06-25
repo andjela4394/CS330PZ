@@ -1,5 +1,6 @@
 package rs.ac.metropolitan.cs330pz.presentation.nav_bar
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
@@ -13,10 +14,12 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -29,7 +32,10 @@ fun NavBar(
     val tabs = listOf("Explore", "Favorites", "History")
 
 
-    Column(modifier = Modifier.fillMaxWidth()) {
+    Column(modifier = Modifier
+        .fillMaxWidth()
+        .background(Color.DarkGray)
+    ) {
         TopAppBar(
             title = { Text("Cocktail Explorer") },
             actions = {
@@ -42,7 +48,8 @@ fun NavBar(
         TabRow(selectedTabIndex = viewModel.tabIndex) {
             tabs.forEachIndexed { index, title ->
                 Tab(
-                    text = { Text(title, fontSize = 19.sp,
+                    text = { Text(
+                        title, fontSize = 19.sp,
                         fontFamily = FontFamily.SansSerif,
                     )
                     },

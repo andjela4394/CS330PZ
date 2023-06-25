@@ -31,7 +31,8 @@ class CocktailNavBarViewModel @Inject constructor(
             isMainPage = true,
             isSearching = false,
             localDatabase = false,
-            dialog = false
+            dialog = false,
+            isFavorite = false
         )
     }
 
@@ -40,7 +41,8 @@ class CocktailNavBarViewModel @Inject constructor(
             isMainPage = false,
             isSearching = true,
             localDatabase = false,
-            dialog = false
+            dialog = false,
+            isFavorite = false
         )
     }
 
@@ -52,7 +54,8 @@ class CocktailNavBarViewModel @Inject constructor(
                     isMainPage = true,
                     localDatabase = false,
                     isSearching = false,
-                    dialog = false
+                    dialog = false,
+                    isFavorite = false
                 )
             }
 
@@ -61,7 +64,8 @@ class CocktailNavBarViewModel @Inject constructor(
                     isMainPage = false,
                     isSearching = false,
                     localDatabase = true,
-                    dialog = false
+                    dialog = false,
+                    isFavorite = true
                 )
             }
 
@@ -70,7 +74,8 @@ class CocktailNavBarViewModel @Inject constructor(
                     isMainPage = false,
                     isSearching = false,
                     localDatabase = true,
-                    dialog = false
+                    dialog = false,
+                    isFavorite = false
                 )
             }
         }

@@ -10,7 +10,8 @@ import rs.ac.metropolitan.cs330pz.domain.model.CocktailDetail
 
 @Database(
     entities = [CocktailDetail::class],
-    version = 1
+    version = 1,
+    exportSchema = false
 )
 @TypeConverters(StringListTypeConverter::class)
 abstract class CocktailDetailDatabase :RoomDatabase(){

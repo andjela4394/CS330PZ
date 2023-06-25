@@ -5,7 +5,7 @@ import rs.ac.metropolitan.cs330pz.domain.model.CocktailDetail
 import rs.ac.metropolitan.cs330pz.domain.repository.CocktailDatabaseRepository
 import javax.inject.Inject
 
-class GetFavoriteCocktailFromDatabase @Inject constructor(
+class GetFavoriteCocktailFromDatabaseUseCase @Inject constructor(
     private val repository: CocktailDatabaseRepository
 ){
 

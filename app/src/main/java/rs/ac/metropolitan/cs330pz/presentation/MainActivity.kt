@@ -48,6 +48,7 @@ class MainActivity : ComponentActivity() {
                         ){
                             CocktailAddScreen(navController = navController)
                         }
+
                     }
                 }
 

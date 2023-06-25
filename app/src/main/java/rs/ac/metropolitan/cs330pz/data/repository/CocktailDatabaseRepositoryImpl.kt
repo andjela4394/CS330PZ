@@ -1,5 +1,6 @@
 package rs.ac.metropolitan.cs330pz.data.repository
 
+import android.util.Log
 import kotlinx.coroutines.flow.Flow
 import rs.ac.metropolitan.cs330pz.data.local.dao.CocktailDetailDao
 import rs.ac.metropolitan.cs330pz.domain.model.CocktailDetail
@@ -10,6 +11,7 @@ class CocktailDatabaseRepositoryImpl (
         ):CocktailDatabaseRepository{
 
     override suspend fun insertNewCocktail(cocktailDetail: CocktailDetail) {
+        Log.d("CocktailDetailScreen", "Uslo u rep")
         dao.insertCocktailDetail(cocktailDetail)
     }
 
