@@ -69,7 +69,7 @@ class CocktailDetailViewModel @Inject constructor(
                 //Log.d("CocktailDetailScreen", "Ovo je odg ${getCocktailByIdFromDatabaseUseCase(it.id)}")
                 var cocktail: CocktailDetail = getCocktailByIdFromDatabaseUseCase(it.id)
                 Log.d("CocktailDetailScreen", "${cocktail.favorite}")
-                if(cocktail == null || cocktail.favorite == null ) {
+                if(cocktail == null || cocktail.favorite == null || cocktail.favorite == false) {
                     it.favorite = true
                     addCocktailToDatabaseUseCase(it)
                 }
