@@ -20,6 +20,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import rs.ac.metropolitan.cs330pz.presentation.Screen
 import rs.ac.metropolitan.cs330pz.presentation.cocktail_favorite.components.CocktailFavoriteMainListItem
+import rs.ac.metropolitan.cs330pz.presentation.cocktail_history.components.CocktailHisotryMainListItem
 import rs.ac.metropolitan.cs330pz.presentation.cocktail_list.CocktailListViewModel
 import rs.ac.metropolitan.cs330pz.presentation.nav_bar.CocktailNavBarViewModel
 import rs.ac.metropolitan.cs330pz.presentation.nav_bar.NavBar
@@ -64,6 +65,9 @@ fun CocktailMainScreen (
             } else if (navViewModel.state.value.isFavorite && !navViewModel.state.value.isSearching) {
                  CocktailFavoriteMainListItem(navController = navController)
              }
+            else{
+                CocktailHisotryMainListItem(navController = navController)
+            }
         }
 
     }

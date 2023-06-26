@@ -33,8 +33,14 @@ class CocktailDetailViewModel @Inject constructor(
         savedStateHandle.get<String>(Constants.COCKTAIL_ID)?.let { cocktailId ->
             getCocktail(cocktailId.toInt())
         }
-        checkIsFavorite()
 
+    }
+
+    fun check(cocktailDetail: CocktailDetail): Boolean{
+        if(getCocktailByIdFromDatabaseUseCase(cocktailDetail.id) == null){
+            return false
+        }
+        return true
     }
 
     fun favourite(){
@@ -42,18 +48,25 @@ class CocktailDetailViewModel @Inject constructor(
             isFavorite = !state.value.isFavorite!!
         )
     }
-    fun checkIsFavorite(){
+
+    suspend fun addCocktailFvToDatabase(){
         viewModelScope.launch {
             state.value.cocktail?.let{
-                if(it.favorite == true){
-                    _state.value.isFavorite = true
+                if(check(it)){
+                    it.favorite = true
                 }
+                else{
+                    var helper: Boolean = it.favorite!!
+                    it.favorite = !helper
+                }
+                addCocktailToDatabaseUseCase(it)
+                Log.d("CocktailDetailScreen", "Upis u bazu ${it.favorite}")
+                _state.value.isFavorite = it.favorite!!
             }
         }
     }
 
-
-    suspend fun addCocktailToDatabase(){
+    fun addCocktailToDatabase(){
         viewModelScope.launch {
             //Log.d("CocktailDetailScreen", "Uslo na click")
             state.value.cocktail?.let{
@@ -61,11 +74,11 @@ class CocktailDetailViewModel @Inject constructor(
                     it.favorite = false
                 }
                 Log.d("CocktailDetailScreen", "Uslo na click")
-                var helper: Boolean = it.favorite!!
-                it.favorite = !helper
+//                var helper: Boolean = it.favorite!!
+//                it.favorite = !helper
                 addCocktailToDatabaseUseCase(it)
                 Log.d("CocktailDetailScreen", "Upis u bazu ${it.favorite}")
-                _state.value.isFavorite = it.favorite
+                _state.value.isFavorite = it.favorite!!
             }
         }
     }

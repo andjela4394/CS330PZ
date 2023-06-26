@@ -50,18 +50,21 @@ import androidx.navigation.NavController
 import coil.compose.rememberImagePainter
 import kotlinx.coroutines.launch
 import rs.ac.metropolitan.cs330pz.presentation.Screen
+import rs.ac.metropolitan.cs330pz.presentation.cocktail_favorite.CocktailFavoriteViewModel
 
 @SuppressLint("StateFlowValueCalledInComposition")
 @Composable
 fun CocktailDetailScreen(
     viewModel: CocktailDetailViewModel = hiltViewModel(),
     navController: NavController,
-    modifier: Modifier = Modifier.padding(top = 20.dp)
+    modifier: Modifier = Modifier.padding(top = 20.dp),
 ) {
     val state = viewModel.state.value
-    var isFavorite = viewModel.state.value.isFavorite
     val coroutineScope = rememberCoroutineScope()
+    var isFavorite = viewModel.state.value.isFavorite
     var expanded by remember { mutableStateOf(false) }
+
+    viewModel.addCocktailToDatabase()
 
     Card(
         elevation = CardDefaults.cardElevation(
@@ -74,7 +77,6 @@ fun CocktailDetailScreen(
             .padding(horizontal = 24.dp)
     ) {
         Box(modifier = Modifier.fillMaxWidth()) {
-          //  Log.d("CocktailDetailScreen", "Fav na pocetku${isFavorite}")
             IconButton(
                 modifier = Modifier
                     .background(Color.Transparent)
@@ -102,10 +104,11 @@ fun CocktailDetailScreen(
                     .scale(1.5f)
                     .align(Alignment.BottomEnd),
                 onClick = {
-                    coroutineScope.launch{
-                        viewModel.addCocktailToDatabase()
+                    coroutineScope.launch {
+                        viewModel.addCocktailFvToDatabase()
                     }
                     viewModel.favourite()
+
                 }){
                 Icon(
                     imageVector = if (isFavorite == true) Icons.Outlined.Favorite else Icons.Outlined.FavoriteBorder,

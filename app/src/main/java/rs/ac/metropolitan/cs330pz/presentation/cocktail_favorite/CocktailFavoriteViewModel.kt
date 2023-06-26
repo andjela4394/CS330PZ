@@ -9,11 +9,14 @@ import javax.inject.Inject
 import androidx.compose.runtime.State
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
+import rs.ac.metropolitan.cs330pz.domain.use_case.database_use_cases.add_cocktail.AddCocktailToDatabaseUseCase
 import rs.ac.metropolitan.cs330pz.domain.use_case.database_use_cases.get_favorite_cocktail.GetFavoriteCocktailFromDatabaseUseCase
 
 @HiltViewModel
 class CocktailFavoriteViewModel @Inject constructor(
     private val getFavoriteCocktailFromDatabaseUseCase: GetFavoriteCocktailFromDatabaseUseCase,
+    private val addCocktailToDatabaseUseCase: AddCocktailToDatabaseUseCase,
 ): ViewModel(){
 
 
@@ -26,6 +29,7 @@ class CocktailFavoriteViewModel @Inject constructor(
     }
 
 
+
     private fun getFavoriteCocktailFromDatabase(){
         getFavoriteCocktailFromDatabaseUseCase().onEach {
                 favorite ->
@@ -33,6 +37,7 @@ class CocktailFavoriteViewModel @Inject constructor(
                 cocktailDetailFavorite = favorite
             )
         }.launchIn(viewModelScope)
+
     }
 
 }

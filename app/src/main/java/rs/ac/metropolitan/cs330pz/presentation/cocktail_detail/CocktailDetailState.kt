@@ -7,5 +7,5 @@ data class CocktailDetailState(
     val isLoading: Boolean = false,
     val cocktail: CocktailDetail? = null,
     val error: String = "",
-    var isFavorite: Boolean? = false
+    var isFavorite: Boolean = false
 ){}
