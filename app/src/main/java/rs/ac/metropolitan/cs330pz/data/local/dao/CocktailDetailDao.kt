@@ -23,7 +23,7 @@ interface CocktailDetailDao {
     suspend fun deleteCocktailById(cocktailId: Int)
 
     @Query("SELECT * FROM cocktaildetail WHERE id = :cocktailId")
-    fun getCocktailById(cocktailId: Int): Flow<CocktailDetail>
+    suspend fun getCocktailById(cocktailId: Int): CocktailDetail
 
     @Query("SELECT * FROM cocktaildetail WHERE favorite = 1")
     fun getFavoriteCocktailDetails(): Flow<List<CocktailDetail>>

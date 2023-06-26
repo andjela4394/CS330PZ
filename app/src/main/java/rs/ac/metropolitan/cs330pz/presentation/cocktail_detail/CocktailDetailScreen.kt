@@ -105,9 +105,9 @@ fun CocktailDetailScreen(
                     .align(Alignment.BottomEnd),
                 onClick = {
                     coroutineScope.launch {
-                        viewModel.addCocktailFvToDatabase()
+                        viewModel.check()
                     }
-                    viewModel.favourite()
+                   //viewModel.favourite()
 
                 }){
                 Icon(

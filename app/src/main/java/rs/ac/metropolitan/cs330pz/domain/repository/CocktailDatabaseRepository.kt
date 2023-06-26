@@ -10,7 +10,7 @@ interface CocktailDatabaseRepository {
     fun getAllCocktailDetail(): Flow<List<CocktailDetail>>
     suspend fun deleteCocktailDetail(cocktailId: CocktailDetail)
     suspend fun deleteCocktailFromDatabaseById(cocktailId: Int)
-    fun getCocktailFromDatabaseById(cocktailId: Int):Flow<CocktailDetail>
+    suspend fun getCocktailFromDatabaseById(cocktailId: Int):CocktailDetail
     fun getFavoriteCocktailDetails(): Flow<List<CocktailDetail>>
 
 }

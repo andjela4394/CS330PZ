@@ -27,7 +27,7 @@ class CocktailDatabaseRepositoryImpl (
         dao.deleteCocktailById(cocktailId)
     }
 
-    override fun getCocktailFromDatabaseById(cocktailId: Int): Flow<CocktailDetail> {
+    override suspend fun getCocktailFromDatabaseById(cocktailId: Int): CocktailDetail {
         return dao.getCocktailById(cocktailId)
     }
 

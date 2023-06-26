@@ -9,7 +9,7 @@ class GetCocktailByIdFromDatabaseUseCase @Inject constructor(
     private val repository: CocktailDatabaseRepository
 ){
 
-    operator fun invoke(cocktailId: Int): Flow<CocktailDetail> {
+    operator suspend fun invoke(cocktailId: Int): CocktailDetail {
         return repository.getCocktailFromDatabaseById(cocktailId)
     }
 }
