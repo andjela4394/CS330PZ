@@ -33,4 +33,9 @@ class FakeCocktailDatabaseRepositoryImpl : CocktailDatabaseRepository {
         val favoriteCocktails = cocktailDetails.filter { it.favorite != null }
         return flow { emit(favoriteCocktails) }
     }
+
+    fun setCocktailDetails(details: List<CocktailDetail>) {
+        cocktailDetails.clear()
+        cocktailDetails.addAll(details)
+    }
 }
